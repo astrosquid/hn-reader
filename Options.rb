@@ -1,6 +1,16 @@
 class Options
   attr_reader :opts
 
+  @@help = %{
+NAME
+  hn-reader - read headlines from aggregator sites
+
+SYNOPSIS
+  hn-reader 
+  hn-reader -h
+  hn-reader --help
+  }
+
   def initialize
     args = Hash[ ARGV.flat_map{|s| s.scan(/--?([^=\s]+)(?:=(\S+))?/) } ]
     opts = {:empty => []}
@@ -12,5 +22,16 @@ class Options
       end
     end
     @opts = opts
+  end
+
+  def analyze
+    if @opts[:empty].include?('help') || @opts[:empty].include?('h')
+      puts @@help
+      exit(0)
+    end
+
+    if @opts.include? "belong"
+      # make a belong request instead
+    end
   end
 end
