@@ -1,3 +1,5 @@
+require_relative './Website.rb'
+
 class Options
   attr_reader :opts
 
@@ -30,8 +32,11 @@ SYNOPSIS
       exit(0)
     end
 
-    if @opts.include? "belong"
+    if @opts[:empty].include? "belong"
       # make a belong request instead
+      return Website.new(2)
     end
+
+    Website.new(1)
   end
 end
