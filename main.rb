@@ -1,11 +1,7 @@
-require_relative './NewsReader.rb'
-require_relative './Options.rb'
-require_relative './Website.rb'
+require_relative './hn_reader.rb'
 
-opts = Options.new
-site = opts.analyze # either prints help or returns website
+opts = HNReader::Options.new
+site = opts.analyze
 news = site.get_news_site
-news.get_data
-
-reader = NewsReader.new(news.headline_data)
-reader.print_headlines
+read = HNReader::NewsReader.new(news.get_data)
+read.print_headlines
