@@ -8,10 +8,21 @@ NAME
   hn-reader - read headlines from aggregator sites
 
 SYNOPSIS
-  hn-reader 
-  hn-reader -h
-  hn-reader --help
+  hn-reader: Hacker News headlines
+    Hacker News headlines
+
+  hn-reader [-h || --help]: print this help
+
+  hn-reader [-v || --version]: print version
+
+  hn-reader --belong
+    Belong headlines
+
+  hn-reader --pinboard
+    Pinboard headlines
   }
+
+  @@version = 'hn-reader v0.9'
 
   def initialize
     args = Hash[ ARGV.flat_map{|s| s.scan(/--?([^=\s]+)(?:=(\S+))?/) } ]
@@ -31,10 +42,18 @@ SYNOPSIS
       puts @@help
       exit(0)
     end
+    
+    if @opts[:empty].include?('version') || @opts[:empty].include?('v')
+      puts @@version
+      exit(0)
+    end
 
     if @opts[:empty].include? "belong"
-      # make a belong request instead
       return Website.new(2)
+    end
+
+    if @opts[:empty].include? "pinboard"
+      return Website.new(3)
     end
 
     Website.new(1)
