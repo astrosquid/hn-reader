@@ -29,15 +29,23 @@ class Website
   end
 
   def get_link_tags
-    @links = @html.css(self.link_selector)
+    @link_tags = @html.css(self.link_selector)
     if @site_id == 2
-      @links.pop
+      @link_tags.pop
     end
-    return @links
+    return @link_tags
   end
 
   def fetch
     response = RestClient.get(self.site_url)
     @html = Nokogiri::HTML(response)
+  end
+
+  def get_formatted_data
+    formatted_data = {}
+    @link_tags.each_with_index do |link_tag, i|
+      formatted_data[i + 1] = [link_tag.content, link_tag['href']]
+    end
+    @formatted_data = formatted_data
   end
 end

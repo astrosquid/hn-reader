@@ -71,3 +71,74 @@ RSpec.describe Website, "#get_link_tags" do
     end
   end
 end
+
+RSpec.describe Website, "#collect_formatted_data" do 
+  context "when initialized without args" do 
+    it "formats link data into a hash where keys point to an array, e.g. 1 => [title, link]" do
+      hn = Website.new 
+      hn.fetch
+      hn.get_link_tags
+      data = hn.get_formatted_data
+      expect(data[1]).to_not eq nil
+      expect(data[30]).to_not eq nil
+      data.each do |array|
+        title = array[0]
+        link = array[1] 
+        expect(link[0]).to_not eq ""
+        expect(link[1].include? "http").to eq true
+      end
+    end
+  end
+
+  context "when initialized with 1" do 
+    it "formats Hacker News links into a hash where keys point to an array, e.g. 1 => [title, link]" do
+      hn = Website.new(site_id: 1)
+      hn.fetch
+      hn.get_link_tags
+      data = hn.get_formatted_data
+      expect(data[1]).to_not eq nil
+      expect(data[30]).to_not eq nil
+      data.each do |array|
+        title = array[0]
+        link = array[1] 
+        expect(link[0]).to_not eq ""
+        expect(link[1].include? "http").to eq true
+      end
+    end
+  end
+
+  context "when initialized with 2" do 
+    it "formats BelongIO data into a hash where keys point to an array, e.g. 1 => [title, link]" do
+      site = Website.new(site_id: 2)
+      site.fetch
+      site.get_link_tags
+      data = site.get_formatted_data
+      expect(data[1]).to_not eq nil
+      expect(data[38]).to_not eq nil
+      data.each do |array|
+        title = array[0]
+        link = array[1] 
+        expect(link[0]).to_not eq ""
+        expect(link[1].include? "http").to eq true
+      end
+    end
+  end
+
+  context "when initialized with 3" do 
+    it "formats Pinboard data into a hash where keys point to an array, e.g. 1 => [title, link]" do
+      site = Website.new(site_id: 3)
+      site.fetch
+      site.get_link_tags
+      data = site.get_formatted_data
+      expect(data[1]).to_not eq nil
+      expect(data[100]).to_not eq nil
+      data.each do |array|
+        title = array[0]
+        link = array[1] 
+        expect(link[0]).to_not eq ""
+        expect(link[1].include? "http").to eq true
+      end
+    end
+  end
+end
+
