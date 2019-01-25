@@ -2,7 +2,7 @@ require_relative './Website.rb'
 
 module HNReader
   class Options
-    attr_reader :opts
+    attr_accessor :opts
 
     @@help = %{
   NAME
@@ -23,7 +23,7 @@ module HNReader
       Pinboard headlines
     }
 
-    @@version = 'hn-reader v0.9'
+    @@version = 'hn-reader v1.1'
 
     def initialize
       args = Hash[ ARGV.flat_map{|s| s.scan(/--?([^=\s]+)(?:=(\S+))?/) } ]

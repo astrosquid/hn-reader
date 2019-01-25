@@ -1,22 +1,29 @@
 module HNReader
   class Website
-    attr_accessor :url, :home, :page, :links
+    attr_accessor :url, :site_id
 
     @@sites = {
       1 => 'https://news.ycombinator.com',
       2 => 'https://belong.io',
       3 => 'https://pinboard.in/popular'
     }
+
+    @@css_selectors = {
+      1 => 'a.storylink',
+      2 => 'div.item a',
+      3 => 'a.bookmark_title'
+    }
     
     def initialize(website_id)
-      @url = @@sites[website_id]
-      @site_id = website_id
+      if @@sites.keys.include? website_id
+        @url = @@sites[website_id]
+        @site_id = website_id
+      else 
+        # raise error
+      end
     end
 
     def get_news_site
-      @home = RestClient.get(@url)
-      @page = Nokogiri::HTML(@home)
-
       if @site_id == 1
         HackerNews.new
       elsif @site_id == 2
@@ -27,10 +34,13 @@ module HNReader
     end
   end
 
-  class HackerNews
+  class HackerNews < Website
     attr_reader :headline_data
 
     @@url = 'https://news.ycombinator.com'
+
+    def initialize
+    end
 
     def get_data
       response = RestClient.get(@@url)
@@ -48,10 +58,13 @@ module HNReader
     end
   end
 
-  class BelongIO
+  class BelongIO < Website
     attr_reader :headline_data
 
     @@url = 'https://belong.io'
+
+    def initialize
+    end
 
     def get_data
       response = RestClient.get(@@url)
@@ -71,10 +84,13 @@ module HNReader
 
   end
 
-  class Pinboard
+  class Pinboard < Website
     attr_reader :headline_data
 
     @@url = 'https://pinboard.in/popular'
+
+    def initialize
+    end
 
     def get_data
       response = RestClient.get(@@url)
