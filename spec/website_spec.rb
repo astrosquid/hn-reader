@@ -73,70 +73,78 @@ RSpec.describe Website, "#get_link_tags" do
 end
 
 RSpec.describe Website, "#collect_formatted_data" do 
-  context "when initialized without args" do 
-    it "formats link data into a hash where keys point to an array, e.g. 1 => [title, link]" do
-      hn = Website.new 
-      hn.fetch
-      hn.get_link_tags
-      data = hn.get_formatted_data
-      expect(data[1]).to_not eq nil
-      expect(data[30]).to_not eq nil
-      data.each do |array|
-        title = array[0]
-        link = array[1] 
-        expect(link[0]).to_not eq ""
-        expect(link[1].include? "http").to eq true
-      end
-    end
-  end
-
-  context "when initialized with 1" do 
+  context "when initialized without args (Hacker News)" do 
     it "formats Hacker News links into a hash where keys point to an array, e.g. 1 => [title, link]" do
-      hn = Website.new(site_id: 1)
-      hn.fetch
-      hn.get_link_tags
-      data = hn.get_formatted_data
+      website = Website.new()
+      website.fetch
+      website.get_link_tags
+      data = website.get_formatted_data
       expect(data[1]).to_not eq nil
       expect(data[30]).to_not eq nil
-      data.each do |array|
-        title = array[0]
+      data.each do |key, array|
+        expect(key.class).to eq Integer
+        expect(array.class).to eq Array
+        expect(array[0].class).to eq String
+        expect(array[1].class).to eq String
         link = array[1] 
-        expect(link[0]).to_not eq ""
-        expect(link[1].include? "http").to eq true
+        expect(link.to_s.include? "http").to eq true
       end
     end
   end
 
-  context "when initialized with 2" do 
+  context "when initialized with 1 (Hacker News)" do 
+    it "formats Hacker News links into a hash where keys point to an array, e.g. 1 => [title, link]" do
+      website = Website.new(site_id: 1)
+      website.fetch
+      website.get_link_tags
+      data = website.get_formatted_data
+      expect(data[1]).to_not eq nil
+      expect(data[30]).to_not eq nil
+      data.each do |key, array|
+        expect(key.class).to eq Integer
+        expect(array.class).to eq Array
+        expect(array[0].class).to eq String
+        expect(array[1].class).to eq String
+        link = array[1] 
+        expect(link.to_s.include? "http").to eq true
+      end
+    end
+  end
+
+  context "when initialized with 2 (BelongIO)" do 
     it "formats BelongIO data into a hash where keys point to an array, e.g. 1 => [title, link]" do
-      site = Website.new(site_id: 2)
-      site.fetch
-      site.get_link_tags
-      data = site.get_formatted_data
+      website = Website.new(site_id: 2)
+      website.fetch
+      website.get_link_tags
+      data = website.get_formatted_data
       expect(data[1]).to_not eq nil
-      expect(data.keys.last).to_not eq nil
-      data.each do |array|
-        title = array[0]
+      expect(data[30]).to_not eq nil
+      data.each do |key, array|
+        expect(key.class).to eq Integer
+        expect(array.class).to eq Array
+        expect(array[0].class).to eq String
+        expect(array[1].class).to eq String
         link = array[1] 
-        expect(link[0]).to_not eq ""
-        expect(link[1].include? "http").to eq true
+        expect(link.to_s.include? "http").to eq true
       end
     end
   end
 
-  context "when initialized with 3" do 
+  context "when initialized with 3 (Pinboard)" do 
     it "formats Pinboard data into a hash where keys point to an array, e.g. 1 => [title, link]" do
-      site = Website.new(site_id: 3)
-      site.fetch
-      site.get_link_tags
-      data = site.get_formatted_data
+      website = Website.new(site_id: 3)
+      website.fetch
+      website.get_link_tags
+      data = website.get_formatted_data
       expect(data[1]).to_not eq nil
-      expect(data[100]).to_not eq nil
-      data.each do |array|
-        title = array[0]
+      expect(data[30]).to_not eq nil
+      data.each do |key, array|
+        expect(key.class).to eq Integer
+        expect(array.class).to eq Array
+        expect(array[0].class).to eq String
+        expect(array[1].class).to eq String
         link = array[1] 
-        expect(link[0]).to_not eq ""
-        expect(link[1].include? "http").to eq true
+        expect(link.to_s.include? "http").to eq true
       end
     end
   end
