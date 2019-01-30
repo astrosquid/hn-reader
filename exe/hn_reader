@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'hn_reader'
+
+HNReader.application.run
