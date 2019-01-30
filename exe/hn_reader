@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/hn_reader'
+require_relative 'hn_reader'
 
-HNReader.application.run
+HNReader.application.new
