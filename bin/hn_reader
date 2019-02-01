@@ -2,4 +2,4 @@
 
 require 'hn_reader'
 
-HNReader.application.new
+HNReader::Application.new
