@@ -25,6 +25,5 @@ Dream goals:
 
   s.licenses = ["MIT"]
 
-  s.bindir = "exe"
   s.files = `git ls-files`.split($\)
 end
