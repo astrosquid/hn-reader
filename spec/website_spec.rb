@@ -118,7 +118,7 @@ RSpec.describe HNReader::Website, "#collect_formatted_data" do
       website.get_link_tags
       data = website.get_formatted_data
       expect(data[1]).to_not eq nil
-      expect(data[30]).to_not eq nil
+      expect(data.keys.last).to_not eq nil
       data.each do |key, array|
         expect(key.class).to eq Integer
         expect(array.class).to eq Array

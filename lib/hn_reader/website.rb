@@ -31,7 +31,7 @@ module HNReader
 
     def get_link_tags
       @link_tags = @html.css(self.link_selector)
-      if @site_id == 2
+      if [2].include? @site_id
         @link_tags.pop
       end
       return @link_tags
@@ -45,7 +45,11 @@ module HNReader
     def get_formatted_data
       formatted_data = {}
       @link_tags.each_with_index do |link_tag, i|
-        formatted_data[i + 1] = [link_tag.content, link_tag['href']]
+        href = link_tag['href']
+        if @site_id == 1 && !href.include?('http')
+          href = 'https://news.ycombinator.com/' + href
+        end
+        formatted_data[i + 1] = [link_tag.content, href]
       end
       @formatted_data = formatted_data
     end
