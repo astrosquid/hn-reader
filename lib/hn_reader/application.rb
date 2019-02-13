@@ -6,7 +6,7 @@ module HNReader
 
     def initialize
       @opts_with = ['-l', '--link-only', '-h']
-      @opts_without = ['-b', '--belong', '-p', '--pinboard', '--hyperlink']
+      @opts_without = ['-b', '--belong', '-p', '--pinboard', '--github', '--hyperlink']
 
       @opts = {
         :with => {},
@@ -23,6 +23,8 @@ module HNReader
         website = HNReader::Website.new site_id: 2
       elsif @opts[:without].include? '--pinboard'
         website = HNReader::Website.new site_id: 3
+      elsif @opts[:without].include? '--github'
+        website = HNReader::Website.new site_id: 4
       else
         website = HNReader::Website.new site_id: 1
       end
