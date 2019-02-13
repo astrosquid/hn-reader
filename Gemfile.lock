@@ -27,6 +27,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
+    terminal_link (1.1)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.5)
@@ -37,6 +38,7 @@ PLATFORMS
 DEPENDENCIES
   rest-client
   rspec
+  terminal_link
 
 BUNDLED WITH
    1.17.3
