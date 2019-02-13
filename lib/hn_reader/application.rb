@@ -1,4 +1,4 @@
-require_relative './website'
+require 'hn_reader/website'
 
 module HNReader
   class Application

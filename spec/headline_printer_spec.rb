@@ -1,4 +1,4 @@
-require_relative '../lib/hn_reader'
+require 'hn_reader'
 
 RSpec.describe HNReader::HeadlinePrinter, "#self.numbered_headlines" do
   context "when given headline data in the format 1 => [title, url]" do

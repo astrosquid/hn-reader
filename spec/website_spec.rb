@@ -1,4 +1,4 @@
-require_relative '../lib/hn_reader'
+require 'hn_reader'
 
 RSpec.describe HNReader::Website, "#fetch" do 
   context "when initialized without args" do 

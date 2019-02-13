@@ -1,5 +1,3 @@
-require 'terminal_link'
-
 module HNReader
   class HeadlinePrinter
     def self.process_data_with_opts(headline_data, opts)
