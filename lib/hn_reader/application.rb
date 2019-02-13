@@ -5,8 +5,8 @@ module HNReader
     attr_reader :opts, :opts_with, :opts_without
 
     def initialize
-      @opts_with = ['-l', '--link-only', '-h', '--hyperlink']
-      @opts_without = ['-b', '--belong', '-p', '--pinboard']
+      @opts_with = ['-l', '--link-only', '-h']
+      @opts_without = ['-b', '--belong', '-p', '--pinboard', '--hyperlink']
 
       @opts = {
         :with => {},
@@ -30,7 +30,7 @@ module HNReader
       website.fetch
       website.get_link_tags
       data = website.get_formatted_data
-      HNReader::HeadlinePrinter.numbered_headlines data
+      HNReader::HeadlinePrinter.process_data_with_opts(data, @opts)
     end
 
     def parse_options
