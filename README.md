@@ -12,3 +12,11 @@ Never fear, now you can goof off while reading the most important updates from t
 
     rspec
 
+## Usage
+```bash
+$ ruby -Ilib bin/hn_reader # fetches Hacker News
+$ ruby -Ilib bin/hn_reader --belong # belong io
+$ ruby -Ilib bin/hn_reader --pinboard # pinboard popular page
+$ ruby -Ilib bin/hn_reader --github # github trending
+$ ruby -Ilib bin/hn_reader --hyperlink # print hyperlinks in terminals (VTE-based terms only)
+```
