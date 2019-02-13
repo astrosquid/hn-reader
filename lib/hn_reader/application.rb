@@ -30,7 +30,7 @@ module HNReader
       website.fetch
       website.get_link_tags
       data = website.get_formatted_data
-      puts data
+      HNReader::HeadlinePrinter.numbered_headlines data
     end
 
     def parse_options
@@ -50,8 +50,6 @@ module HNReader
           previous = nil
         end
       end
-
-      print @opts
     end
   end
 end
